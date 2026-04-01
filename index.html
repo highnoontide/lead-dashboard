@@ -1,1 +1,42 @@
-My Dashboard
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lead Dashboard</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+    .card {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .source { font-size: 12px; color: gray; }
+  </style>
+</head>
+<body>
+
+<h1>🔥 Lead Dashboard</h1>
+
+<div id="leads"></div>
+
+<script>
+fetch('data.json')
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById('leads');
+    data.forEach(lead => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `
+        <h3>${lead.title}</h3>
+        <p class="source">${lead.source}</p>
+        <a href="${lead.link}" target="_blank">View</a>
+      `;
+      container.appendChild(div);
+    });
+  });
+</script>
+
+</body>
+</html>
